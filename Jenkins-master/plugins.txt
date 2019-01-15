@@ -6,6 +6,6 @@ htmlpublisher:latest
 greenballs:latest
 simple-theme-plugin:latest
 kubernetes:latest
-docker-plugin:latest
 build-monitor-plugin:latest
 build-pipeline-plugin:latest
+docker-plugin:latest
