@@ -12,11 +12,9 @@ ENV JENKINS_SLAVE_AGENT_PORT 50000
 # Set password for the jenkins user (you may want to alter this).
 USER root
 RUN echo "jenkins:jenkins" | chpasswd
-RUN mkdir -p $JENKINS_HOME \
-  && chown ${uid}:${gid} $JENKINS_HOME \
-RUN mkdir /home/jenkins/.m2
+RUN mkdir /home/jenkins
+RUN chown -R jenkins:jenkins /home/jenkins 
 ADD settings.xml /home/jenkins/.m2/
-RUN chown -R jenkins:jenkins /home/jenkins/.m2/ 
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want
 # to set on a fresh new installation. Use it to bundle additional plugins
