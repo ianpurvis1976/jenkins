@@ -4,6 +4,26 @@ ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 
+# Set password for the jenkins user (you may want to alter this).
+RUN echo "jenkins:jenkins" | chpasswd
+RUN mkdir /home/jenkins/.m2
+ADD settings.xml /home/jenkins/.m2/
+RUN chown -R jenkins:jenkins /home/jenkins/.m2/ 
+
+# `/usr/share/jenkins/ref/` contains all reference configuration we want
+# to set on a fresh new installation. Use it to bundle additional plugins
+# or config file with your custom jenkins Docker image.
+RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
+
+ENV TINI_VERSION 0.14.0
+ENV TINI_SHA 6c41ec7d33e857d4779f14d9c74924cab0c7973485d2972419a3b7c7620ff5fd
+
+# Use tini as subreaper in Docker container to adopt zombie processes
+RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini && chmod +x /bin/tini \
+  && echo "$TINI_SHA  /bin/tini" | sha256sum -c -
+
+COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
+
 # Jenkins home directory is a volume, so configuration and build history
 # can be persisted and survive image upgrades
 VOLUME /var/jenkins_home

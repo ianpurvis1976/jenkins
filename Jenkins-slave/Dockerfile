@@ -1,16 +1,33 @@
-from ubuntu:16.04
+from jenkins/jenkins:lts
 
-ARG http_port=8080
-ARG agent_port=50000
-ARG JENKINS_HOME=/var/jenkins_home
-
-ENV HOME /home/${user}
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
-ENV JENKINS_HOME $JENKINS_HOME
-ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
+ENV JENKINS_HOME /var/jenkins_home
+ENV JENKINS_SLAVE_AGENT_PORT 50000
 
+# Set password for the jenkins user (you may want to alter this).
+RUN echo "jenkins:jenkins" | chpasswd
+RUN mkdir /home/jenkins/.m2
+ADD settings.xml /home/jenkins/.m2/
+RUN chown -R jenkins:jenkins /home/jenkins/.m2/ 
+
+# Jenkins home directory is a volume, so configuration and build history
+# can be persisted and survive image upgrades
+VOLUME /var/jenkins_home
+
+# for main web interface:
+EXPOSE ${http_port}
+
+# will be used by attached slave agents:
+EXPOSE ${agent_port}
+
+# install Maven
 USER root
-RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y maven
+
+
+# from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 # Set password for the jenkins user (you may want to alter this).
 RUN echo "jenkins:jenkins" | chpasswd
@@ -36,50 +53,10 @@ RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION
 
 COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
 
-
-
-
 # Install a basic SSH server
 RUN apt-get install -y openssh-server
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
 RUN mkdir -p /var/run/sshd
-
-
-# jenkins version being bundled in this docker image
-ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.46.2}
-
-# jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=aa7f243a4c84d3d6cfb99a218950b8f7b926af7aa2570b0e1707279d464472c7
-
-# Can be used to customize where jenkins.war get downloaded from
-ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
-
-# could use ADD but this one does not check Last-Modified header neither does it allow to control checksum
-# see https://github.com/docker/docker/issues/8331
-RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
-  && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c -
-
-ENV JENKINS_UC https://updates.jenkins.io
-
-# for main web interface:
-EXPOSE 8080
-
-# will be used by attached slave agents:
-EXPOSE 50000
-
-ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
-
-#COPY jenkins-support /usr/local/bin/jenkins-support
-#COPY jenkins.sh /usr/local/bin/jenkins.sh
-#ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
-
-
-
-# install Maven
-USER root
-RUN apt-get update && apt-get install -y maven
-
 
 
 CMD ["/usr/sbin/sshd", "-D"]
