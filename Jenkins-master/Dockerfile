@@ -14,7 +14,6 @@ USER root
 RUN echo "jenkins:jenkins" | chpasswd
 RUN mkdir -p $JENKINS_HOME \
   && chown ${uid}:${gid} $JENKINS_HOME \
-  && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 RUN mkdir /home/jenkins/.m2
 ADD settings.xml /home/jenkins/.m2/
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/ 
