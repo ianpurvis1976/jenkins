@@ -1,5 +1,10 @@
 from jenkins/jenkins:lts
 
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
@@ -7,6 +12,10 @@ ENV JENKINS_SLAVE_AGENT_PORT 50000
 # Set password for the jenkins user (you may want to alter this).
 USER root
 RUN echo "jenkins:jenkins" | chpasswd
+RUN mkdir -p $JENKINS_HOME \
+  && chown ${uid}:${gid} $JENKINS_HOME \
+  && groupadd -g ${gid} ${group} \
+  && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 RUN mkdir /home/jenkins/.m2
 ADD settings.xml /home/jenkins/.m2/
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/ 
