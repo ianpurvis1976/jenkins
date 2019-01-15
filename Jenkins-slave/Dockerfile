@@ -16,10 +16,6 @@ RUN mkdir /home/jenkins
 RUN chown -R jenkins:jenkins /home/jenkins 
 ADD settings.xml /home/jenkins/.m2/
 
-# Jenkins home directory is a volume, so configuration and build history
-# can be persisted and survive image upgrades
-VOLUME /var/jenkins_home
-
 # for main web interface:
 EXPOSE ${http_port}
 
@@ -34,12 +30,6 @@ RUN apt-get update && apt-get install -y maven
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-
-# Set password for the jenkins user (you may want to alter this).
-RUN echo "jenkins:jenkins" | chpasswd
-RUN mkdir /home/jenkins/.m2
-ADD settings.xml /home/jenkins/.m2/
-RUN chown -R jenkins:jenkins /home/jenkins/.m2/ 
 
 # Jenkins home directory is a volume in Azure Storage, so configuration and build history
 # can be persisted and survive image upgrades
