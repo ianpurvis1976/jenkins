@@ -9,3 +9,16 @@ kubernetes:latest
 build-monitor-plugin:latest
 build-pipeline-plugin:latest
 docker-plugin:latest
+git-parameter:latest
+ansible-tower:latest
+splunk-devops:latest
+splunk-devops-extend:latest
+subversion:latest
+nexus-jenkins-plugin:latest
+nexus-artifact-uploader:latest
+nexus-task-runner:latest
+ansicolor:latest
+build-timeout:latest
+delivery-pipeline-plugin:latest
+ldap:latest
+sonar:latest
