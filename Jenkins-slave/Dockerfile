@@ -33,7 +33,7 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 # Jenkins home directory is a volume in Azure Storage, so configuration and build history
 # can be persisted and survive image upgrades
-VOLUME ${JENKINS_HOME}
+#VOLUME ${JENKINS_HOME}
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want
 # to set on a fresh new installation. Use it to bundle additional plugins
