@@ -16,7 +16,7 @@ EXPOSE ${agent_port}
 
 # install Maven
 RUN apt-get update && apt-get install -y maven
-USER jenkins
+
 
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
