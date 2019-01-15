@@ -5,6 +5,7 @@ ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 
 # Set password for the jenkins user (you may want to alter this).
+USER root
 RUN echo "jenkins:jenkins" | chpasswd
 RUN mkdir /home/jenkins/.m2
 ADD settings.xml /home/jenkins/.m2/
