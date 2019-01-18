@@ -22,4 +22,5 @@ build-timeout:latest
 delivery-pipeline-plugin:latest
 ldap:latest
 sonar:latest
+jdk-tool:latest
 yet-another-docker-plugin:latest
