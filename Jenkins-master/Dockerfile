@@ -29,6 +29,7 @@ RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION
   && echo "$TINI_SHA  /bin/tini" | sha256sum -c -
 
 ADD a_configure_jenkins_credentials.groovy /var/jenkins_home/init.groovy.d/
+ADD b_set_env_vars.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_test.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_dev.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_preprod.groovy /var/jenkins_home/init.groovy.d/
