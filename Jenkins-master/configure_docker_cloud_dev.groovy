@@ -46,7 +46,7 @@ import net.sf.json.JSONObject
 JSONArray clouds_yadocker = [
     //YET ANOTHER DOCKER CLOUD (this is an item in a list of clouds)
     [
-        cloud_name: 'jenkins-slave-production',
+        cloud_name: 'jenkins-slave-development',
         docker_url: 'tcp://172.17.0.1:2375',
         docker_api_version: '',
         host_credentials_id: '',
