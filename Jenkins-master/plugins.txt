@@ -24,3 +24,4 @@ ldap:latest
 sonar:latest
 jdk-tool:latest
 yet-another-docker-plugin:latest
+groovy:latest
