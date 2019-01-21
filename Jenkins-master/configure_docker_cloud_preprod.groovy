@@ -109,7 +109,7 @@ JSONArray clouds_yadocker = [
                 //valid values: launch_ssh or launch_jnlp
                 launch_method: 'launch_ssh',
                 //settings specific to launch_ssh (you only need one or the other)
-                launch_ssh_credentials_id:'d6adc9f8-d881-46f6-a2ec-827eb9f6f8f9',
+                launch_ssh_credentials_id: System.getProperty("jenkinsuserid"),
                 launch_ssh_port: 22,
                 launch_ssh_java_path: '',
                 launch_ssh_jvm_options: '',

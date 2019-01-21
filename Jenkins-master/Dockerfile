@@ -28,6 +28,7 @@ ENV TINI_SHA 6c41ec7d33e857d4779f14d9c74924cab0c7973485d2972419a3b7c7620ff5fd
 RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini && chmod +x /bin/tini \
   && echo "$TINI_SHA  /bin/tini" | sha256sum -c -
 
+ADD a_configure_jenkins_credentials.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_test.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_dev.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_preprod.groovy /var/jenkins_home/init.groovy.d/
