@@ -25,3 +25,5 @@ sonar:latest
 jdk-tool:latest
 yet-another-docker-plugin:latest
 groovy:latest
+active-directory:latest
+role-strategy:latest
