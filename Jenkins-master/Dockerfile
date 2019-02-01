@@ -15,6 +15,7 @@ RUN echo "jenkins:jenkins" | chpasswd
 RUN mkdir /home/jenkins
 RUN chown -R jenkins:jenkins /home/jenkins 
 ADD settings.xml /home/jenkins/.m2/
+ADD jenkins-dc.cer /home/jenkins
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want
 # to set on a fresh new installation. Use it to bundle additional plugins
