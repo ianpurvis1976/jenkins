@@ -18,7 +18,7 @@ ADD settings.xml /home/jenkins/.m2/
 ADD jenkins-dc.cer /home/jenkins
 RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
 RUN mkdir -p CUSTOM_TrustStore
-RUN cp /var/jenkins_home/jre/lib/security/cacerts $CUSTOM_TrustStore
+RUN cp /var/jenkins_home/jre/lib/security/cacerts CUSTOM_TrustStore
 RUN JAVA_HOME/bin/keytool -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /var/jenkins_home/jenkins-dc.cer -noprompt
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want
