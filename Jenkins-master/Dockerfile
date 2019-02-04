@@ -50,6 +50,9 @@ EXPOSE ${http_port}
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
 
+RUN cp /var/jenkins_home/jre/lib/security/cacerts CUSTOM_TrustStore
+RUN JAVA_HOME/bin/keytool -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /var/jenkins_home/jenkins-dc.cer -noprompt
+
 # install Maven
 USER root
 RUN apt-get update && apt-get install -y maven
@@ -58,6 +61,5 @@ RUN apt-get update && apt-get install -y maven
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-RUN echo $CUSTOM_TrustStore
-RUN cp /var/jenkins_home/jre/lib/security/cacerts CUSTOM_TrustStore
-RUN JAVA_HOME/bin/keytool -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /var/jenkins_home/jenkins-dc.cer -noprompt
+
+
