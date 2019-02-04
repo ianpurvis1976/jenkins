@@ -56,7 +56,7 @@ USER root
 RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
 RUN mkdir -p CUSTOM_TrustStore
 RUN cp /docker-java-home/jre/lib/security/cacerts CUSTOM_TrustStore
-RUN JAVA_HOME/bin/keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /var/jenkins_home/jenkins-dc.cer
+RUN keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /var/jenkins_home/jenkins-dc.cer
 
 
 # install Maven
