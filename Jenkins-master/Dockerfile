@@ -50,8 +50,14 @@ EXPOSE ${http_port}
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
 
-#RUN cp /var/jenkins_home/jre/lib/security/cacerts CUSTOM_TrustStore
-#RUN JAVA_HOME/bin/keytool -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /var/jenkins_home/jenkins-dc.cer -noprompt
+USER jenkins
+ADD jenkins-dc.cer /home/jenkins
+USER root
+RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
+RUN mkdir -p CUSTOM_TrustStore
+RUN cp /var/java_home/jre/lib/security/cacerts CUSTOM_TrustStore
+RUN JAVA_HOME/bin/keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /var/jenkins_home/jenkins-dc.cer
+
 
 # install Maven
 USER root
