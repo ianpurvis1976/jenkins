@@ -52,6 +52,7 @@ EXPOSE ${agent_port}
 
 
 USER root
+RUN  apt-get install -y copy
 ADD jenkins-dc.cer /home/jenkins
 #RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
 RUN mkdir -p /var/jenkins_home/.cacerts/
@@ -61,7 +62,7 @@ RUN keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/c
 
 # install Maven
 USER root
-RUN apt-get update && apt-get install -y maven
+RUN apt-get update && apt-get install -y maven copy
 
 
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
