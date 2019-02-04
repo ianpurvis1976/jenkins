@@ -40,6 +40,13 @@ ADD configure_docker_cloud_preprod.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_prod.groovy /var/jenkins_home/init.groovy.d/
 COPY init.groovy /var/jenkins_home/init.groovy
 
+USER root
+ADD jenkins-dc.cer /home/jenkins
+#RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
+RUN mkdir -p /var/jenkins_home/.cacerts
+RUN cp /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts
+#RUN keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /home/jenkins/jenkins-dc.cer
+
 # Jenkins home directory is a volume, so configuration and build history
 # can be persisted and survive image upgrades
 VOLUME /var/jenkins_home
@@ -51,12 +58,7 @@ EXPOSE ${http_port}
 EXPOSE ${agent_port}
 
 
-USER root
-ADD jenkins-dc.cer /home/jenkins
-#RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
-RUN mkdir -p /var/jenkins_home/.cacerts
-RUN cp /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts
-#RUN keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /home/jenkins/jenkins-dc.cer
+
 
 
 # install Maven
