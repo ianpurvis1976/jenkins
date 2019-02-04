@@ -43,9 +43,9 @@ COPY init.groovy /var/jenkins_home/init.groovy
 USER root
 ADD jenkins-dc.cer /home/jenkins
 #RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
-RUN mkdir -p /var/jenkins_home/.cacerts
-RUN cp /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts
-#RUN keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /home/jenkins/jenkins-dc.cer
+#RUN mkdir -p /var/jenkins_home/.cacerts
+#RUN cp /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts
+RUN keytool -noprompt -storepass changeit -keystore /docker-java-home/jre/lib/security/cacerts -import -alias dccert -file /home/jenkins/jenkins-dc.cer
 
 # Jenkins home directory is a volume, so configuration and build history
 # can be persisted and survive image upgrades
