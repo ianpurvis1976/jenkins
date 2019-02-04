@@ -55,8 +55,8 @@ USER root
 RUN  apt-get install -y copy
 ADD jenkins-dc.cer /home/jenkins
 #RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
-RUN mkdir -p /var/jenkins_home/.cacerts/
-RUN copy /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts/
+RUN mkdir -p /var/jenkins_home/.cacerts
+RUN copy /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts
 RUN keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /home/jenkins/jenkins-dc.cer
 
 
