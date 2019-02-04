@@ -61,7 +61,7 @@ RUN cp /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts
 
 # install Maven
 USER root
-RUN apt-get update && apt-get install -y maven copy
+RUN apt-get update && apt-get install -y maven
 
 
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
