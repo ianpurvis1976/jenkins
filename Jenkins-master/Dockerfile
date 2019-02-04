@@ -50,9 +50,9 @@ EXPOSE ${http_port}
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
 
-USER jenkins
-ADD jenkins-dc.cer /home/jenkins
+
 USER root
+ADD jenkins-dc.cer /home/jenkins
 #RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
 RUN mkdir -p /var/jenkins_home/.cacerts/
 RUN cp /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts/
