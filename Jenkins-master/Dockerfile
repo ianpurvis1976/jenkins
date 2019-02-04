@@ -53,9 +53,9 @@ EXPOSE ${agent_port}
 USER jenkins
 ADD jenkins-dc.cer /home/jenkins
 USER root
-RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
-RUN mkdir -p CUSTOM_TrustStore
-RUN cp /docker-java-home/jre/lib/security/cacerts CUSTOM_TrustStore
+#RUN CUSTOM_TrustStore=/var/jenkins_home/.cacerts/
+RUN mkdir -p /var/jenkins_home/.cacerts
+RUN cp /docker-java-home/jre/lib/security/cacerts /var/jenkins_home/.cacerts/
 RUN keytool -noprompt -storepass changeit -keystore /var/jenkins_home/.cacerts/cacerts -import -alias dccert -file /home/jenkins/jenkins-dc.cer
 
 
