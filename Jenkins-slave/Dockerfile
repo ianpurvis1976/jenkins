@@ -4,6 +4,8 @@ ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
 ARG gid=1000
+ARG agent_port=50000         
+ARG http_port=8080
 
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 ENV JENKINS_HOME /var/jenkins_home
