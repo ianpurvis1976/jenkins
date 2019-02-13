@@ -11,5 +11,5 @@
     String bindName = ''
     String bindPassword = ''
 
-    SecurityRealm ad_realm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server, TlsConfiguration.JDK_TRUSTSTORE)
+    SecurityRealm ad_realm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server)
     jenkins.instance.setSecurityRealm(ad_realm)
