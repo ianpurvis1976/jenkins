@@ -3,15 +3,14 @@ import jenkins.model.*
 import hudson.plugins.active_directory.*
 import com.google.common.collect.Lists
 
+def domain = "iansdomain.com"
+def site = ""
+def bindName = ""
+def bindPassword = ""
+def server = "win2016dc-2.iansdomain.com:389"
+def groupLookupStrategy = "AUTOMATIC"
+def tlsConfiguration = "JDK_TRUSTSTORE"
 
-
-string domain = "iansdomain.com"
-string site = ""
-string bindName = ""
-string bindPassword = ""
-string server = "win2016dc-2.iansdomain.com:3629"
-string groupLookupStrategy = "AUTOMATIC"
-string tlsConfiguration = "JDK_TRUSTSTORE"
 
 def instance = Jenkins.getInstance()
 
