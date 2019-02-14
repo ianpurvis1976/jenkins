@@ -8,7 +8,7 @@ def site = ""
 def bindName = ""
 def bindPassword = ""
 def server = "win2016dc-2.iansdomain.com:389"
-def groupLookupStrategy = "AUTOMATIC"
+def groupLookupStrategy = "AUTO"
 def tlsConfiguration = "JDK_TRUSTSTORE"
 
 
