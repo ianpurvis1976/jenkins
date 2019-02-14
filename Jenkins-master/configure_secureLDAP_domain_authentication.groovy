@@ -24,9 +24,10 @@ ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
                                                                       bindPassword,
                                                                       server,
                                                                       GroupLookupStrategy.valueOf(groupLookupStrategy.toString().toUpperCase()),
-							                                          false,									                                    false,
-									                                  null,
-									                                  false
+							                                                        false,
+                                                                      false,
+									                                                    null,
+									                                                    false
                                                                       )
                     
 realm.getDomains().each({
