@@ -26,6 +26,6 @@
         true, // Boolean startTls
         TlsConfiguration.JDK_TRUSTSTORE)
     instance.setSecurityRealm(ad_realm)
-    instance.save())
+    instance.save()
 
     println "--> configure LDAP... done"
