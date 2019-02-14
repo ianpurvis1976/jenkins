@@ -14,7 +14,7 @@
     String bindName = ''
     String bindPassword = ''
 
-    adrealm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server)
+    adrealm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server, TlsConfiguration.JDK_TRUSTSTORE)
     instance.setSecurityRealm(adrealm)
 
     println "--> configure LDAP... done"
