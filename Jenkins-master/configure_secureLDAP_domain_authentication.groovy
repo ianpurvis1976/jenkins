@@ -3,10 +3,10 @@ import jenkins.model.*
 import hudson.plugins.active_directory.*
 import com.google.common.collect.Lists
 
-def domain = 'iansdomain.com'
+def domain = "iansdomain.com"
 def site = ""
-def bindName = 'iansdomain\jenkins'
-def bindPassword = 'Qwerty1'
+def bindName = "jenkins"
+def bindPassword = "Qwerty1"
 def server = "win2016dc-2.iansdomain.com:389"
 def groupLookupStrategy = "AUTO"
 def tlsConfiguration = "JDK_TRUSTSTORE"
