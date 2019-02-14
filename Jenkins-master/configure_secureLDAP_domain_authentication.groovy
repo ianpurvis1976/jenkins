@@ -9,7 +9,7 @@ string domain = 'iansdomain.com'
 string site = null
 string bindName = null
 string bindPassword = null
-string server = 'win2016dc-2.iansdomain.com:389'
+string server = 'win2016dc-2.iansdomain.com:3629'
 string groupLookupStrategy = "AUTOMATIC"
 string tlsConfiguration = "JDK_TRUSTSTORE"
 
@@ -26,7 +26,8 @@ ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
 							                                                        false,
                                                                       false,
 									                                                    null,
-									                                                    false
+									                                                    true,
+                                                                      TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
                                                                       )
                     
 realm.getDomains().each({
