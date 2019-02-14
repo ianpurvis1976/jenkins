@@ -1,31 +1,39 @@
-    import jenkins.model.*
-    import hudson.model.*
-    import hudson.security.*
-    import hudson.plugins.*
-    import hudson.plugins.active_directory.*
-    import hudson.*
-    import jenkins.*
+import java.lang.System
+import jenkins.model.*
+import hudson.plugins.active_directory.*
+import com.google.common.collect.Lists
 
-    def instance = Jenkins.getInstance()
 
-    String domain = 'iansdomain.com'
-    String site = ''
-    String server = 'win2016dc-2.iansdomain.com:3269'
-    String bindName = ''
-    String bindPassword = ''
 
-    adrealm = new ActiveDirectorySecurityRealm(domain, 
-        site, 
-        bindName, 
-        bindPassword, 
-        server, 
-        GroupLookupStrategy.RECURSIVE,
-        false,	// Boolean removeIrrelevantGroups
-        domain != null, // Boolean customDomain
-        null, // CacheConfiguration cache,
-        true, // Boolean startTls
-        TlsConfiguration.JDK_TRUSTSTORE)
-    instance.setSecurityRealm(ad_realm)
-    instance.save()
+def enabled = false
+def domain = "domain.com"
+def site = null
+def bindName = null
+def bindPassword = null
+def server = null
+def groupLookupStrategy = "RECURSIVE"
+def tlsConfiguration = "JDK_TRUSTSTORE"
 
-    println "--> configure LDAP... done"
+def instance = Jenkins.getInstance()
+
+println "--> Configure AD"
+ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
+                                                                      Lists.newArrayList(new ActiveDirectoryDomain(domain, server)),
+                                                                      site,
+                                                                      bindName,
+                                                                      bindPassword,
+                                                                      server,
+                                                                      GroupLookupStrategy.valueOf(groupLookupStrategy.toString().toUpperCase()),
+							                                          false,									                                    false,
+									                                  new CacheConfiguration(1000, 6000),
+									                                  true,
+                                                                      TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
+                                                                      )
+                    
+realm.getDomains().each({
+  it.bindName = realm.bindName
+  it.bindPassword = realm.bindPassword
+})
+  
+Jenkins.instance.setSecurityRealm(realm)
+Jenkins.instance.save()
