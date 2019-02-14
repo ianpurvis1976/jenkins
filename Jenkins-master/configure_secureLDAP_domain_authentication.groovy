@@ -1,9 +1,12 @@
     import jenkins.model.*
+    import hudson.model.*
     import hudson.security.*
     import hudson.plugins.*
     import hudson.plugins.active_directory.*
     import hudson.*
     import jenkins.*
+
+    def instance = Jenkins.getInstance()
 
     String domain = 'iansdomain.com'
     String site = ''
@@ -11,5 +14,7 @@
     String bindName = ''
     String bindPassword = ''
 
-    SecurityRealm ad_realm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server)
-    jenkins.instance.setSecurityRealm(ad_realm)
+    adrealm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server)
+    instance.setSecurityRealm(adrealm)
+
+    println "--> configure LDAP... done"
