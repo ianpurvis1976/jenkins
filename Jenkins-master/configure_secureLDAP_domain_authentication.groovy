@@ -7,24 +7,26 @@ def domain = "iansdomain.com"
 def site = ""
 def bindName = "jenkins"
 def bindPassword = "Qwerty1"
-def server = "win2016dc-2.iansdomain.com:389"
+def server = "win2016dc-2.iansdomain.com:3269"
 def groupLookupStrategy = "AUTO"
 def tlsConfiguration = "JDK_TRUSTSTORE"
 
 
 def instance = Jenkins.getInstance()
-
+def ActiveDirectoryDomain adDomain = new ActiveDirectoryDomain(domain, win2016dc-2.iansdomain.com);
+def domains = new ArrayList<ActiveDirectoryDomain>();
+domains.add(adDomain);
 
 println "--> Configure AD"
 ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
-                                                                      Lists.newArrayList(new ActiveDirectoryDomain(domain, server)),
+                                                                      domains,
                                                                       site,
                                                                       bindName,
                                                                       bindPassword,
                                                                       server,
                                                                       GroupLookupStrategy.valueOf(groupLookupStrategy.toString().toUpperCase()),
 							                                                        false,
-                                                                      false,
+                                                                      domain!=null,
 									                                                    null,
 									                                                    true,
                                                                       TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
