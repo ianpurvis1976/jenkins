@@ -6,11 +6,11 @@ import com.google.common.collect.Lists
 
 
 def enabled = false
-def domain = "domain.com"
+def domain = "iansdomain.com"
 def site = null
 def bindName = null
 def bindPassword = null
-def server = null
+def server = "win2016dc-2.iansdomain.com:3269"
 def groupLookupStrategy = "RECURSIVE"
 def tlsConfiguration = "JDK_TRUSTSTORE"
 
@@ -26,7 +26,7 @@ ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
                                                                       server,
                                                                       GroupLookupStrategy.valueOf(groupLookupStrategy.toString().toUpperCase()),
 							                                          false,									                                    false,
-									                                  new CacheConfiguration(1000, 6000),
+									                                  null,
 									                                  true,
                                                                       TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
                                                                       )
