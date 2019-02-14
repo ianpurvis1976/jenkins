@@ -5,11 +5,11 @@ import com.google.common.collect.Lists
 
 
 
-string domain = 'iansdomain.com'
-string site = null
-string bindName = null
-string bindPassword = null
-string server = 'win2016dc-2.iansdomain.com:3629'
+string domain = "iansdomain.com"
+string site = ""
+string bindName = ""
+string bindPassword = ""
+string server = "win2016dc-2.iansdomain.com:3629"
 string groupLookupStrategy = "AUTOMATIC"
 string tlsConfiguration = "JDK_TRUSTSTORE"
 
