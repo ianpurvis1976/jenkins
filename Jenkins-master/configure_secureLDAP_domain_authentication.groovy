@@ -5,20 +5,19 @@ import com.google.common.collect.Lists
 
 
 
-def domain = "iansdomain.com"
-def site = null
-def bindName = null
-def bindPassword = null
-def server = "win2016dc-2.iansdomain.com:389"
-def groupLookupStrategy = "RECURSIVE"
-def tlsConfiguration = "JDK_TRUSTSTORE"
+string domain = 'iansdomain.com'
+string site = null
+string bindName = null
+string bindPassword = null
+string server = 'win2016dc-2.iansdomain.com:389'
+string groupLookupStrategy = "AUTOMATIC"
+string tlsConfiguration = "JDK_TRUSTSTORE"
 
 def instance = Jenkins.getInstance()
 
 
 println "--> Configure AD"
 ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
-                                                                      Lists.newArrayList(new ActiveDirectoryDomain(domain, server)),
                                                                       site,
                                                                       bindName,
                                                                       bindPassword,
