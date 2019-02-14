@@ -16,6 +16,7 @@ def tlsConfiguration = "JDK_TRUSTSTORE"
 
 def instance = Jenkins.getInstance()
 
+
 println "--> Configure AD"
 ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
                                                                       Lists.newArrayList(new ActiveDirectoryDomain(domain, server)),
