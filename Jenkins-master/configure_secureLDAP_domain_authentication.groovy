@@ -8,8 +8,8 @@ import com.google.common.collect.Lists
 def enabled = false
 def domain = "iansdomain.com"
 def site = null
-def bindName = null
-def bindPassword = null
+def bindName = 'ian'
+def bindPassword = 'eccadE$D53mins'
 def server = "win2016dc-2.iansdomain.com:3269"
 def groupLookupStrategy = "RECURSIVE"
 def tlsConfiguration = "JDK_TRUSTSTORE"
