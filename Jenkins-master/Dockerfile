@@ -38,6 +38,7 @@ ADD configure_docker_cloud_test.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_dev.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_preprod.groovy /var/jenkins_home/init.groovy.d/
 ADD configure_docker_cloud_prod.groovy /var/jenkins_home/init.groovy.d/
+ADD configure_secureLDAP_domain_authentication.groovy /var/jenkins_home/init.groovy.d/
 COPY init.groovy /var/jenkins_home/init.groovy
 
 USER root
