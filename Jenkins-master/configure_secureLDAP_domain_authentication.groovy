@@ -8,7 +8,7 @@ def dc = "win2016dc-2.iansdomain.com"
 def site = ""
 def bindName = ""
 def bindPassword = ""
-def server = "win2016dc-2.iansdomain.com:3269"
+def server = "win2016dc-2.iansdomain.com:389"
 def groupLookupStrategy = "AUTO"
 def tlsConfiguration = "JDK_TRUSTSTORE"
 
@@ -24,19 +24,19 @@ ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
                                                                       site,
                                                                       bindName,
                                                                       bindPassword,
-                                                                      'win2016dc-2.iansdomain.com:3269',
+                                                                      'win2016dc-2.iansdomain.com:389',
                                                                       GroupLookupStrategy.valueOf(groupLookupStrategy.toString().toUpperCase()),
 							                                                        false,
                                                                       domain!=null,
 									                                                    null,
-									                                                    true,
-                                                                      TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
+									                                                    false
+                                                                      //TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
                                                                       )
                     
-realm.getDomains().each({
-  it.bindName = realm.bindName
-  it.bindPassword = realm.bindPassword
-})
+//realm.getDomains().each({
+//  it.bindName = realm.bindName
+//  it.bindPassword = realm.bindPassword
+//})
   
 Jenkins.instance.setSecurityRealm(realm)
 Jenkins.instance.save()
