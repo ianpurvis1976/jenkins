@@ -14,7 +14,7 @@ def tlsConfiguration = "JDK_TRUSTSTORE"
 
 
 def instance = Jenkins.getInstance()
-def ActiveDirectoryDomain adDomain = new ActiveDirectoryDomain(domain, dc);
+def ActiveDirectoryDomain adDomain = new ActiveDirectoryDomain(domain, server);
 def domains = new ArrayList<ActiveDirectoryDomain>();
 domains.add(adDomain);
 
