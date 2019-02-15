@@ -4,6 +4,7 @@ import hudson.plugins.active_directory.*
 import com.google.common.collect.Lists
 
 def domain = "iansdomain.com"
+def dc = "win2016dc-2.iansdomain.com"
 def site = ""
 def bindName = "jenkins"
 def bindPassword = "Qwerty1"
@@ -13,7 +14,7 @@ def tlsConfiguration = "JDK_TRUSTSTORE"
 
 
 def instance = Jenkins.getInstance()
-def ActiveDirectoryDomain adDomain = new ActiveDirectoryDomain(domain, win2016dc-2.iansdomain.com);
+def ActiveDirectoryDomain adDomain = new ActiveDirectoryDomain(domain, dc);
 def domains = new ArrayList<ActiveDirectoryDomain>();
 domains.add(adDomain);
 
