@@ -8,7 +8,7 @@ def dc = "win2016dc-2.iansdomain.com"
 def site = ""
 def bindName = ""
 def bindPassword = ""
-def server = "win2016dc-2.iansdomain.com:389"
+def server = "win2016dc-2.iansdomain.com:3269"
 def groupLookupStrategy = "AUTO"
 def tlsConfiguration = "JDK_TRUSTSTORE"
 
@@ -24,13 +24,13 @@ ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
                                                                       site,
                                                                       bindName,
                                                                       bindPassword,
-                                                                      'win2016dc-2.iansdomain.com:389',
+                                                                      'win2016dc-2.iansdomain.com:3269',
                                                                       GroupLookupStrategy.valueOf(groupLookupStrategy.toString().toUpperCase()),
 							                                                        false,
                                                                       domain!=null,
 									                                                    null,
-									                                                    false
-                                                                      //TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
+									                                                    true,
+                                                                      TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
                                                                       )
                     
 //realm.getDomains().each({
