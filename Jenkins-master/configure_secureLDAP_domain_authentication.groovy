@@ -24,13 +24,13 @@ ActiveDirectorySecurityRealm realm = new ActiveDirectorySecurityRealm(domain,
                                                                       site,
                                                                       bindName,
                                                                       bindPassword,
-                                                                      'win2016dc-2.iansdomain.com:3269',
+                                                                      server,
                                                                       GroupLookupStrategy.valueOf(groupLookupStrategy.toString().toUpperCase()),
 							                                                        false,
                                                                       domain!=null,
 									                                                    null,
 									                                                    true,
-                                                                      TlsConfiguration.valueOf(tlsConfiguration.toString().toUpperCase())
+                                                                      TlsConfiguration.JDK_TRUSTSTORE
                                                                       )
                     
 //realm.getDomains().each({
